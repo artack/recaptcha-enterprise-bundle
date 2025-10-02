@@ -1,0 +1,38 @@
+{
+  "name": "artack/recaptcha-enterprise-bundle",
+  "description": "Symfony integration for Google reCAPTCHA Enterprise (Assessments API)",
+  "type": "symfony-bundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "ARTACK WebLab GmbH",
+      "homepage": "https://www.artack.ch"
+    }
+  ],
+  "require": {
+    "php": "^8.4",
+    "symfony/framework-bundle": "^7.0",
+    "symfony/http-client": "^7.0",
+    "symfony/form": "^7.0",
+    "symfony/validator": "^7.0",
+    "twig/twig": "^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Artack\\RecaptchaEnterpriseBundle\\": "src/"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "scripts": {
+    "update:tools": "composer update -d tools/php-cs-fixer && composer update -d tools/phpstan",
+    "phpcs": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix -vvv --diff --dry-run --allow-risky=yes --ansi",
+    "phpcs:fix": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix -vvv --allow-risky=yes --ansi",
+    "phpstan": "tools/phpstan/vendor/bin/phpstan analyse -c phpstan.neon --ansi",
+    "test": [
+      "@phpstan",
+      "@phpcs"
+    ]
+  }
+}
