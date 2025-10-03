@@ -9,6 +9,7 @@ use Artack\RecaptchaEnterpriseBundle\Service\IpResolver;
 use Artack\RecaptchaEnterpriseBundle\Service\UserAgentResolver;
 use Artack\RecaptchaEnterpriseBundle\Validator\RecaptchaEnterpriseValidator;
 use Artack\RecaptchaEnterpriseBundle\Verifier\Verifier;
+use Artack\RecaptchaEnterpriseBundle\Verifier\VerifierInterface;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -60,6 +61,8 @@ class RecaptchaEnterpriseBundle extends AbstractBundle
                 service('artack_recaptcha_enterprise.user_agent_resolver'),
             ])
         ;
+
+        $services->alias(VerifierInterface::class, 'artack_recaptcha_enterprise.verifier');
 
         $services->set(RecaptchaEnterpriseValidator::class)
             ->args([

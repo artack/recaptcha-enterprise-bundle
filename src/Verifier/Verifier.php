@@ -10,14 +10,16 @@ use Symfony\Component\HttpClient\HttpClient;
 
 use function sprintf;
 
-final readonly class Verifier implements VerifierInterface
+final class Verifier implements VerifierInterface
 {
+    private ?Result $result = null;
+
     public function __construct(
-        private string $projectId,
-        private string $siteKey,
-        private string $apiKey,
-        private IpResolverInterface $ipResolver,
-        private UserAgentResolverInterface $userAgentResolver,
+        private readonly string $projectId,
+        private readonly string $siteKey,
+        private readonly string $apiKey,
+        private readonly IpResolverInterface $ipResolver,
+        private readonly UserAgentResolverInterface $userAgentResolver,
     ) {}
 
     public function verify(string $token, ?string $expectedAction = null): Result
@@ -54,6 +56,11 @@ final readonly class Verifier implements VerifierInterface
 
         $success = $valid && (null === $expectedAction || $action === $expectedAction);
 
-        return new Result($success, $valid, $action, $score, $response);
+        return $this->result = new Result($success, $valid, $action, $score, $response);
+    }
+
+    public function getLatestResult(): ?Result
+    {
+        return $this->result;
     }
 }
