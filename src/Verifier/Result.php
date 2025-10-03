@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Artack\RecaptchaEnterpriseBundle\Service;
+namespace Artack\RecaptchaEnterpriseBundle\Verifier;
 
 final readonly class Result
 {

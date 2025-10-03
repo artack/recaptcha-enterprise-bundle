@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Artack\RecaptchaEnterpriseBundle\Service;
+namespace Artack\RecaptchaEnterpriseBundle\Verifier;
 
+use Artack\RecaptchaEnterpriseBundle\Service\IpResolverInterface;
+use Artack\RecaptchaEnterpriseBundle\Service\UserAgentResolverInterface;
 use Symfony\Component\HttpClient\HttpClient;
 
 use function sprintf;
@@ -52,6 +54,6 @@ final readonly class Verifier implements VerifierInterface
 
         $success = $valid && (null === $expectedAction || $action === $expectedAction);
 
-        return new Result($success, $valid, $score, $action, $response);
+        return new Result($success, $valid, $action, $score, $response);
     }
 }

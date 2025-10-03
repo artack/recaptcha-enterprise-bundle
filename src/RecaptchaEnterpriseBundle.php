@@ -7,7 +7,7 @@ namespace Artack\RecaptchaEnterpriseBundle;
 use Artack\RecaptchaEnterpriseBundle\Form\RecaptchaEnterpriseType;
 use Artack\RecaptchaEnterpriseBundle\Service\IpResolver;
 use Artack\RecaptchaEnterpriseBundle\Service\UserAgentResolver;
-use Artack\RecaptchaEnterpriseBundle\Service\Verifier;
+use Artack\RecaptchaEnterpriseBundle\Verifier\Verifier;
 use Artack\RecaptchaEnterpriseBundle\Validator\RecaptchaEnterpriseValidator;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -24,7 +24,7 @@ class RecaptchaEnterpriseBundle extends AbstractBundle
     {
         $definition->rootNode()
             ->children()
-            ->booleanNode('enabled')->defaultValue(true)->cannotBeEmpty()->end()
+            ->booleanNode('enabled')->defaultValue(true)->end()
             ->scalarNode('site_key')->isRequired()->cannotBeEmpty()->end()
             ->scalarNode('project_id')->isRequired()->cannotBeEmpty()->end()
             ->scalarNode('api_key')->isRequired()->cannotBeEmpty()->end()
@@ -41,10 +41,12 @@ class RecaptchaEnterpriseBundle extends AbstractBundle
         $services = $container->services();
 
         $services->set('artack_recaptcha_enterprise.ip_resolver')
+            ->autowire()
             ->class(IpResolver::class)
         ;
 
         $services->set('artack_recaptcha_enterprise.user_agent_resolver')
+            ->autowire()
             ->class(UserAgentResolver::class)
         ;
 

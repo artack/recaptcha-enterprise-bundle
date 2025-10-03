@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Artack\RecaptchaEnterpriseBundle\Validator;
 
-use Artack\RecaptchaEnterpriseBundle\Service\VerifierInterface;
+use Artack\RecaptchaEnterpriseBundle\Verifier\VerifierInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
