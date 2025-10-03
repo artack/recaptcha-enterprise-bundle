@@ -16,6 +16,7 @@ final class RecaptchaEnterpriseValidator extends ConstraintValidator
 {
     public function __construct(
         private readonly VerifierInterface $verifier,
+        private readonly bool $enabled,
         private readonly float $minScore,
     ) {}
 
@@ -25,11 +26,15 @@ final class RecaptchaEnterpriseValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, RecaptchaEnterprise::class);
         }
 
-        if (null === $value || '' === $value || !is_string($value)) {
+        if ('' === $value || !is_string($value)) {
             throw new UnexpectedValueException($value, 'string');
         }
 
-        $result = $this->verifier->verify($value, $constraint->action);
+        if (!$this->enabled) {
+            return;
+        }
+
+        $result = $this->verifier->verify($value, $constraint->actionName);
 
         $minScore = $constraint->minScore ?? $this->minScore;
 

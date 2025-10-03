@@ -24,6 +24,7 @@ class RecaptchaEnterpriseBundle extends AbstractBundle
     {
         $definition->rootNode()
             ->children()
+            ->booleanNode('enabled')->defaultValue(true)->cannotBeEmpty()->end()
             ->scalarNode('site_key')->isRequired()->cannotBeEmpty()->end()
             ->scalarNode('project_id')->isRequired()->cannotBeEmpty()->end()
             ->scalarNode('api_key')->isRequired()->cannotBeEmpty()->end()
@@ -33,7 +34,7 @@ class RecaptchaEnterpriseBundle extends AbstractBundle
     }
 
     /**
-     * @param array{site_key:string, project_id:string, api_key:string, min_score:float} $config
+     * @param array{enabled:bool, site_key:string, project_id:string, api_key:string, min_score:float} $config
      */
     public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
     {
@@ -61,6 +62,7 @@ class RecaptchaEnterpriseBundle extends AbstractBundle
         $services->set(RecaptchaEnterpriseValidator::class)
             ->args([
                 service('artack_recaptcha_enterprise.verifier'),
+                $config['enabled'],
                 $config['min_score'],
             ])
             ->tag('validator.constraint_validator')
@@ -69,6 +71,7 @@ class RecaptchaEnterpriseBundle extends AbstractBundle
         $services->set(RecaptchaEnterpriseType::class)
             ->args([
                 $config['site_key'],
+                $config['enabled'],
             ])
             ->tag('form.type')
         ;
