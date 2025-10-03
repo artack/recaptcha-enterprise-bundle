@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Artack\RecaptchaEnterpriseBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -9,13 +11,16 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @extends AbstractType<null>
+ */
 final class RecaptchaEnterpriseType extends AbstractType
 {
     public function __construct(
         private readonly string $siteKey,
     ) {}
 
-    public function getParent(): ?string
+    public function getParent(): string
     {
         return HiddenType::class;
     }

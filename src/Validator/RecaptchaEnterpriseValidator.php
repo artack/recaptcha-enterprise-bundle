@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Artack\RecaptchaEnterpriseBundle\Validator;
 
 use Artack\RecaptchaEnterpriseBundle\Service\VerifierInterface;
@@ -8,6 +10,8 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
+use function is_string;
+
 final class RecaptchaEnterpriseValidator extends ConstraintValidator
 {
     public function __construct(
@@ -15,16 +19,13 @@ final class RecaptchaEnterpriseValidator extends ConstraintValidator
         private readonly float $minScore,
     ) {}
 
-    /**
-     * @param RecaptchaEnterprise $constraint
-     */
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         if (!$constraint instanceof RecaptchaEnterprise) {
             throw new UnexpectedTypeException($constraint, RecaptchaEnterprise::class);
         }
 
-        if (null === $value || '' === $value) {
+        if (null === $value || '' === $value || !is_string($value)) {
             throw new UnexpectedValueException($value, 'string');
         }
 
