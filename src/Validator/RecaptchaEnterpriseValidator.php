@@ -30,7 +30,7 @@ final class RecaptchaEnterpriseValidator extends ConstraintValidator
             return;
         }
 
-        if ('' === $value || !is_string($value)) {
+        if (!is_string($value)) {
             throw new UnexpectedValueException($value, 'string');
         }
 
