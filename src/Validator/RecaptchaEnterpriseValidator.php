@@ -26,6 +26,10 @@ final class RecaptchaEnterpriseValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, RecaptchaEnterprise::class);
         }
 
+        if (!$value) {
+            return;
+        }
+
         if ('' === $value || !is_string($value)) {
             throw new UnexpectedValueException($value, 'string');
         }
