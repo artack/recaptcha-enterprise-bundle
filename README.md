@@ -3,13 +3,11 @@ artack/recaptcha-enterprise-bundle
 
 > Symfony integration for Google reCAPTCHA Enterprise (Assessments API).
 
-
 [![Latest Release](https://img.shields.io/packagist/v/artack/recaptcha-enterprise-bundle.svg)](https://packagist.org/packages/artack/recaptcha-enterprise-bundle)
 [![MIT License](https://img.shields.io/packagist/l/artack/recaptcha-enterprise-bundle.svg)](http://opensource.org/licenses/MIT)
 [![Total Downloads](https://img.shields.io/packagist/dt/artack/recaptcha-enterprise-bundle.svg)](https://packagist.org/packages/artack/recaptcha-enterprise-bundle)
 
 Developed by [ARTACK WebLab GmbH](https://www.artack.ch) in Zurich, Switzerland.
-
 
 Features
 --------
@@ -18,7 +16,6 @@ Features
 - Ships a **RecaptchaEnterprise** validation constraint for attributes and PHP configuration, including configurable score threshold and action names.
 - Automatically resolves client IP and User-Agent from Symfony's request stack and forwards them to Google when available.
 - Registers the form theme automatically, so no manual Twig configuration is required.
-
 
 Installation
 ------------
@@ -47,9 +44,7 @@ artack_recaptcha_enterprise:
     api_key: '%env(resolve:ARTACK_GOOGLE_RECAPTCHA_API_KEY)%'
     min_score: 0.5 # default score threshold used by the validator when none is provided
 ```
-
 All keys are required. `min_score` defaults to `0.5` and is used when a constraint does not define its own threshold.
-
 
 Usage
 -----

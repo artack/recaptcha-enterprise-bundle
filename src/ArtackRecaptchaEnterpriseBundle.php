@@ -17,7 +17,7 @@ use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
-class RecaptchaEnterpriseBundle extends AbstractBundle
+class ArtackRecaptchaEnterpriseBundle extends AbstractBundle
 {
     protected string $extensionAlias = 'artack_recaptcha_enterprise';
 
@@ -85,7 +85,7 @@ class RecaptchaEnterpriseBundle extends AbstractBundle
     public function prependExtension(ContainerConfigurator $container, ContainerBuilder $builder): void
     {
         $builder->prependExtensionConfig('twig', [
-            'form_themes' => ['@RecaptchaEnterprise/Form/recaptcha_enterprise_widget.html.twig'],
+            'form_themes' => ['@ArtackRecaptchaEnterprise/Form/recaptcha_enterprise_widget.html.twig'],
         ]);
     }
 }
