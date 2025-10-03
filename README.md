@@ -31,6 +31,7 @@ $ composer require artack/recaptcha-enterprise-bundle
 
 The bundle is auto-registered thanks to Symfony Flex support.
 
+> ⚠️ This bundle is being used in production, but hasn't reached version 1.0 yet. Therefore, there can be breaking changes between minor versions. I'd recommend that you require the bundle only with the current minor version like `composer require artack/recapture-bundle:0.1.*`
 
 Configuration
 -------------
