@@ -38,11 +38,15 @@ Create `config/packages/artack_recaptcha_enterprise.yaml` with your Google proje
 ```yaml
 # config/packages/artack_recaptcha_enterprise.yaml
 artack_recaptcha_enterprise:
-    enabled: '%env(resolve:ARTACK_GOOGLE_RECAPTCHA_ENABLED)%' # defaults to true, use this to disable validation in dev and test environments
+    enabled: '%env(resolve:ARTACK_GOOGLE_RECAPTCHA_ENABLED)%' # defaults to true
     site_key: '%env(resolve:ARTACK_GOOGLE_RECAPTCHA_SITE_KEY)%'
     project_id: '%env(resolve:ARTACK_GOOGLE_RECAPTCHA_PROJECT_ID)%'
     api_key: '%env(resolve:ARTACK_GOOGLE_RECAPTCHA_API_KEY)%'
     min_score: 0.5 # default score threshold used by the validator when none is provided
+
+when@dev:
+    artack_recaptcha_enterprise:
+        enabled: false # disable reCAPTCHA in dev environments
 ```
 All keys are required. `min_score` defaults to `0.5` and is used when a constraint does not define its own threshold.
 
