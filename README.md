@@ -86,23 +86,6 @@ final class ContactType extends AbstractType
 
 The provided Twig theme is prepended automatically. When the form submits, the bundle executes `grecaptcha.enterprise.execute`, fills the hidden field and re-submits the form.
 
-Validate the token with the built-in constraint:
-
-```php
-use Artack\RecaptchaEnterpriseBundle\Validator\RecaptchaEnterprise;
-
-final class ContactData
-{
-    #[]
-    RecaptchaEnterprise(
-        minScore: 0.7, #optional
-        action: 'contact', #optional
-    )
-    public ?string $recaptchaToken = null;
-}
-```
-
-
 License
 -------
 
