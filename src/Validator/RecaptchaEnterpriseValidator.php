@@ -26,19 +26,23 @@ final class RecaptchaEnterpriseValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, RecaptchaEnterprise::class);
         }
 
-        if (!is_string($value) || '' === $value || null === $value) {
-            throw new UnexpectedValueException($value, 'string');
-        }
-
         if (!$this->enabled) {
             return;
+        }
+
+        if (null === $value) {
+            $value = '';
+        }
+
+        if (!is_string($value)) {
+            throw new UnexpectedValueException($value, 'string');
         }
 
         $result = $this->verifier->verify($value, $constraint->actionName);
 
         $minScore = $constraint->minScore ?? $this->minScore;
 
-        if (!$result->success || ($result->score && $result->score < $minScore)) {
+        if (!$result->success || (null !== $result->score && $result->score < $minScore)) {
             $this->context->buildViolation($constraint->message)->addViolation();
         }
     }
